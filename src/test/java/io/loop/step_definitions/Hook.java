@@ -6,12 +6,19 @@ import io.loop.utilities.Driver;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 public class Hook {
+
+    private static final Logger LOG = LogManager.getLogger();
     @Before
 
     public void setUp(Scenario scenario) {
         Driver.getDriver();
         BrowserUtils.myScenario = scenario;
+        LOG.info(" ------------------START AUTOMATION-------------LOOPCAMP");
     }
     @After
     public void tearDown(Scenario scenario) {
@@ -21,8 +28,12 @@ public class Hook {
             scenario.attach(screenshot, "image/png", scenario.getName());
 
         }
+        LOG.info(" ------------------END AUTOMATION-------------LOOPCAMP");
         Driver.closeDriver();
+
     }
+
+
     @AfterStep
     public void takeScreenshot(Scenario scenario) {
 
