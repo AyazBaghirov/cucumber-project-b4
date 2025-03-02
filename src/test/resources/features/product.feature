@@ -1,6 +1,6 @@
 Feature: product data table practice
 
-  @listOfMap
+  @listOfMap @smoke
   Scenario: verify each product price
     # practice List<Map<String, String>>
     Given User is on the HomePage

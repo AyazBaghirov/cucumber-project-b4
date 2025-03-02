@@ -3,11 +3,15 @@ package io.loop.step_definitions;
 import io.cucumber.java.en.*;
 import io.cucumber.java.it.Ma;
 import io.loop.pages.LoginPage;
+import io.loop.pages.POM;
 import io.loop.utilities.BrowserUtils;
 import io.loop.utilities.ConfigurationReader;
 import io.loop.utilities.DocuportConstants;
 import io.loop.utilities.Driver;
+import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -15,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 public class LoginStepDefs {
     LoginPage loginPage = new LoginPage();
+    POM pages = new POM();
 
     @Given("user is on Docuport login page")
     public void user_is_on_docuport_login_page() {
@@ -34,11 +39,13 @@ public class LoginStepDefs {
     @When("user enters password for client")
     public void user_enters_password_for_client() {
         loginPage.passwordInput.sendKeys(DocuportConstants.PASSWORD);
+        BrowserUtils.waitForClickable(loginPage.loginButton, DocuportConstants.EXTRA_LARGE);
+        loginPage.loginButton.click();
 
     }
     @When("user click login button")
     public void user_click_login_button() {
-        loginPage.loginButton.click();
+
 
     }
     @Then("user should be able to see the home for client")
@@ -50,6 +57,7 @@ public class LoginStepDefs {
 
     @When("user enters username for employee")
     public void user_enters_username_for_employee() {
+        loginPage.login2(DocuportConstants.USERNAME_EMPLOYEE,DocuportConstants.PASSWORD);
 
     }
     @When("user enters password for employee")
@@ -65,6 +73,7 @@ public class LoginStepDefs {
     @When("user enters username for advisor")
     public void user_enters_username_for_advisor() {
 
+        loginPage.login2(DocuportConstants.USERNAME_ADVISOR, DocuportConstants.PASSWORD);
     }
     @When("user enters password for advisor")
     public void user_enters_password_for_advisor() {
@@ -78,7 +87,7 @@ public class LoginStepDefs {
 
     @When("user enters username for supervisor")
     public void user_enters_username_for_supervisor() {
-
+loginPage.login2(DocuportConstants.USERNAME_SUPERVISOR, DocuportConstants.PASSWORD);
     }
     @When("user enters password for supervisor")
     public void user_enters_password_for_supervisor() {
@@ -106,4 +115,19 @@ public class LoginStepDefs {
     }
 
 
+    @When("user click continue button")
+    public void user_click_continue_button() {
+        BrowserUtils.waitForClickable(loginPage.continueButton, DocuportConstants.EXTRA_LARGE);
+        loginPage.continueButton.click();
+
+    }
+    @Then("user validate left navigate items")
+    public void user_validate_left_navigate_items( List<String> leftNavigation) {
+
+        List<String> actualLeftNavigation = new ArrayList<String>();
+        for (WebElement item : pages.getDocuportHomePageForClient().leftNavigation) {
+            actualLeftNavigation.add(item.getText().trim());
+        }
+        assertEquals("Actual left navigation does not match expected",leftNavigation, actualLeftNavigation);
+    }
 }
