@@ -5,6 +5,15 @@ public class POM {
     private GoogleSearchPage googleSearchPage;
     private WikiSearchPage wikiSearchPage;
     private ProductPage productPage;
+    private SmartBearOrderPage smartBearPages;
+    private DocuportHomePageForClient docuportHomePageForClient;
+
+    public SmartBearOrderPage getSmartBearPages() {
+        if(smartBearPages==null){
+            smartBearPages = new SmartBearOrderPage();
+        }
+        return smartBearPages;
+    }
 
     public LoginPage getLoginPage() {
         if (loginPage == null) {
@@ -31,6 +40,12 @@ public class POM {
             productPage = new ProductPage();
         }
         return productPage;
+    }
+    public DocuportHomePageForClient getDocuportHomePageForClient() {
+        if (docuportHomePageForClient == null) {
+            docuportHomePageForClient = new DocuportHomePageForClient();
+        }
+        return docuportHomePageForClient;
     }
 
 }
