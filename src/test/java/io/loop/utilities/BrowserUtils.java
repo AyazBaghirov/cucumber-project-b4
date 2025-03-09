@@ -15,6 +15,14 @@ public class BrowserUtils {
 
     public static Scenario myScenario;
 
+    public static void justWait(int seconds){
+        try{
+            Thread.sleep(seconds);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * takes screenshot
      * @author AB
@@ -124,6 +132,10 @@ public class BrowserUtils {
     public static WebElement waitForVisibility(WebElement element, int timeToWaitSec){
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeToWaitSec));
         return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+    public static void clickWithJS(WebElement element){
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
     }
 }
 
