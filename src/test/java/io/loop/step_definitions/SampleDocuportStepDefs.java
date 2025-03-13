@@ -2,12 +2,12 @@ package io.loop.step_definitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.loop.pages.HomePage;
-import io.loop.pages.LeftNavigatePage;
-import io.loop.pages.LoginPage;
-import io.loop.pages.ReceivedDocsPage;
+import io.loop.pages.*;
+import io.loop.utilities.BrowserUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.awt.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,6 +18,8 @@ public class SampleDocuportStepDefs {
     ReceivedDocsPage receivedDocsPage = new ReceivedDocsPage();
     LeftNavigatePage leftNavigatePage = new LeftNavigatePage();
     private static final Logger LOG = LogManager.getLogger();
+    MyUploadsPage myUploadsPage = new MyUploadsPage();
+
 
     @When("user inserts {string} to {string} field on {string} page")
     public void user_inserts_to_field_on_page(String input, String field, String page) {
@@ -49,6 +51,10 @@ public class SampleDocuportStepDefs {
                 receivedDocsPage.clickButton(button);
                 LOG.info(button + " - was successfully clicked");
                 break;
+            case "my uploads":
+                myUploadsPage.clickButton(button);
+                LOG.info(button+ " - was successfully clicked");
+                break;
             default: throw new IllegalArgumentException("not such a page: " + page);
         }
     }
@@ -56,16 +62,18 @@ public class SampleDocuportStepDefs {
     public void user_selects_to_field_on_page(String button, String field, String page) {
         switch (page.toLowerCase().trim()){
             case "login", "choose account":
-
                 LOG.info( " - was successfully clicked");
                 break;
             case "left navigate":
-
                 LOG.info( " - was successfully clicked");
                 break;
             case "received doc":
                 receivedDocsPage.clickButton(button);
+                LOG.info( " - was successfully clicked");
+                break;
 
+            case "my uploads":
+                myUploadsPage.clickButton(button);
                 LOG.info( " - was successfully clicked");
                 break;
             default: throw new IllegalArgumentException("not such a page: " + page);
@@ -88,9 +96,18 @@ public class SampleDocuportStepDefs {
 
                 LOG.info( " - was successfully clicked");
                 break;
+
+
             default: throw new IllegalArgumentException("not such a page: " + page);
         }
 
 
+    }
+
+    @Then("user uploads document")
+    public void user_uploads_document() throws AWTException {
+//   myUploadsPage.uploadDocuments.sendKeys("\"C:\\Users\\Admin\\OneDrive\\Desktop\\path.txt\"");
+//
+        BrowserUtils.uploadFileForWindows("\"C:\\Users\\Admin\\OneDrive\\Desktop\\path.txt\"");
     }
 }

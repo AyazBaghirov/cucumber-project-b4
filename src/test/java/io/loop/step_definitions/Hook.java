@@ -29,7 +29,7 @@ public class Hook {
 
         }
         LOG.info(" ------------------END AUTOMATION-------------LOOPCAMP");
-        Driver.closeDriver();
+       // Driver.closeDriver();
 
     }
 

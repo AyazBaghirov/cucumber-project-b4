@@ -47,6 +47,9 @@ public class LeftNavigatePage {
             case "invitations":
                 BrowserUtils.waitForClickable(invitationsButton, 10).click();
                 break;
+            case "my uploads":
+                BrowserUtils.waitForClickable(myUploads, 10).click();
+                break;
 
             case "terms and conditions":
                 BrowserUtils.waitForClickable(termsAndConditionsButton, 10).click();
