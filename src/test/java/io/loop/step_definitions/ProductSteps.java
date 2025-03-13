@@ -33,7 +33,7 @@ public class ProductSteps {
 //            System.out.println("productDetail.get(\"Product\") = " + productDetail.get("Product"));
 //            System.out.println("productDetail.get(\"expectedPrice\") = " + productDetail.get("expectedPrice"));
 
-            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
        // click the category
             pages.getProductPage().clickCategory(productDetail.get("Category"));
             // get actual price
@@ -41,7 +41,7 @@ public class ProductSteps {
 
             // get product price from my data table
             String expectedPrice = productDetail.get("expectedPrice");
-            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
 
             //do assertion
             assertEquals("Expected does not match the actual", expectedPrice, actualPrice);
@@ -51,18 +51,18 @@ public class ProductSteps {
 
     @Then("User should be able to see expected prices in the following products with listOfList")
     public void user_should_be_able_to_see_expected_prices_in_the_following_products_with_list_of_list(List<List<String>>productDetails) {
-        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
         for (List<String> productDetail : productDetails) {
             //category
-            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
             pages.getProductPage().clickCategory(productDetail.get(0));
 
             // get actual price for each product
             String actualPrice = pages.getProductPage().getProductPrice(productDetail.get(1));
-            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
             // get expected price for each product
             String expectedPrice = productDetail.get(2);
-            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
             // assertion
             assertEquals("Expected does not match the actual", expectedPrice, actualPrice);
             LOG.info("Validation of the price for: "+productDetail.get(0)+", for Product: "+productDetail.get(1)+", expected price: "+expectedPrice+", actual price: "+actualPrice);

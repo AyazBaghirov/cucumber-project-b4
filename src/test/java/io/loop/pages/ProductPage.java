@@ -11,13 +11,13 @@ import java.time.Duration;
 public class ProductPage {
 
     public ProductPage(){
-        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
     public void clickCategory(String category){
 
-        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
         Driver.getDriver().findElement(By.xpath("//a[contains(.,'"+category+"')]")).click();
     }
 
@@ -26,11 +26,11 @@ public class ProductPage {
         try{
 
 
-        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
         String actualPrice = Driver.getDriver().findElement(By.xpath("//a[normalize-space(.)='"+product+"']/../../h5")).getText();
         return actualPrice.substring(1);}
         catch (StaleElementReferenceException e){
-            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
             String actualPrice = Driver.getDriver().findElement(By.xpath("//a[normalize-space(.)='"+product+"']/../../h5")).getText();
             return actualPrice.substring(1);
         }
