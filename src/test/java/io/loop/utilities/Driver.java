@@ -38,7 +38,9 @@ public class Driver {
             String browserType = ConfigurationReader.getProperties("browser");
             switch (browserType.toLowerCase()){
                 case "chrome":
-                    driverPool.set(new ChromeDriver());
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--disable-blink-features=AutomationControlled");
+                    driverPool.set(new ChromeDriver(options));
                     driverPool.get().manage().window().maximize();
                     driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
 
@@ -56,7 +58,7 @@ public class Driver {
                     driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
                     break;
                 case "headless":
-                    ChromeOptions options = new ChromeOptions();
+                    options = new ChromeOptions();
                     options.addArguments("--headless");
                     driverPool.set(new ChromeDriver(options));
                     driverPool.get().manage().window().maximize();

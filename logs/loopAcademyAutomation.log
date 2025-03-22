@@ -1,1 +1,1 @@
-09.03.2025 14:28:09 ERROR ExcelUtils:50 - happened while getting cell data: Cannot invoke "org.apache.poi.ss.usermodel.Sheet.getRow(int)" because "this.workSheet" is null
+16.03.2025 11:37:41 INFO  Hook:31 -  ------------------END AUTOMATION-------------LOOPCAMP

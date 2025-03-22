@@ -1,5 +1,6 @@
 package io.loop.pages;
 
+import io.loop.utilities.ConfigurationReader;
 import io.loop.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
